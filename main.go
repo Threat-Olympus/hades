@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"flag"
 	"hades/modules"
 	"os"
-	"os/signal"
-	"syscall"
-	"time"
 )
 
 // // Detection of known threat indicators
@@ -25,9 +22,31 @@ import (
 // func applyRules() {
 // }
 
+var (
+	help *bool
+	net  *bool
+)
+
+func init() {
+	help = flag.Bool("help", false, "Show help")
+	net = flag.Bool("net", false, "Monitor network events")
+}
+
 func main() {
+	flag.Parse()
+
+	if *help {
+		flag.Usage()
+		os.Exit(0)
+	}
+
+	if *net {
+		modules.NetworkEvents()
+		os.Exit(0)
+	}
+
 	// go modules.NetworkEvents()
-	go modules.LogEvents()
+	// go modules.LogEvents()
 
 	// go detectThreatIndicators()
 
@@ -37,23 +56,23 @@ func main() {
 
 	// go applyRules()
 
-	waitForTerminationSignal()
+	// waitForTerminationSignal()
 }
 
-func waitForTerminationSignal() {
-	signalChannel := make(chan os.Signal, 1)
-	signal.Notify(signalChannel, os.Interrupt, syscall.SIGTERM)
+// func waitForTerminationSignal() {
+// 	signalChannel := make(chan os.Signal, 1)
+// 	signal.Notify(signalChannel, os.Interrupt, syscall.SIGTERM)
 
-	<-signalChannel
+// 	<-signalChannel
 
-	cleanup()
+// 	cleanup()
 
-	os.Exit(0)
-}
+// 	os.Exit(0)
+// }
 
-func cleanup() {
-	// Implement cleanup tasks here
-	fmt.Println("Performing cleanup tasks...")
-	time.Sleep(2 * time.Second)
-	fmt.Println("Cleanup tasks completed.")
-}
+// func cleanup() {
+// 	// Implement cleanup tasks here
+// 	fmt.Println("Performing cleanup tasks...")
+// 	time.Sleep(2 * time.Second)
+// 	fmt.Println("Cleanup tasks completed.")
+// }
