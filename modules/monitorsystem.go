@@ -1,3 +1,4 @@
+// Real-time monitoring of system events
 package modules
 
 import (
@@ -8,8 +9,7 @@ import (
 	"strings"
 )
 
-// Real-time monitoring of system events
-func MONITORSYSTEMEVENT() {
+func NetworkEvents() {
 	cmd := exec.Command("netstat", "-nt")
 
 	output, err := cmd.StdoutPipe()

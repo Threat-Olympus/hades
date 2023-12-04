@@ -26,7 +26,7 @@ import (
 // }
 
 func main() {
-	go modules.MONITORSYSTEMEVENT()
+	go modules.NetworkEvents()
 
 	// go detectThreatIndicators()
 
