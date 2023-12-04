@@ -23,13 +23,15 @@ import (
 // }
 
 var (
-	help *bool
-	net  *bool
+	help  *bool
+	net   *bool
+	event *bool
 )
 
 func init() {
 	help = flag.Bool("help", false, "Show help")
 	net = flag.Bool("net", false, "Monitor network events")
+	event = flag.Bool("event", false, "Monitor Windows log events")
 }
 
 func main() {
@@ -42,6 +44,11 @@ func main() {
 
 	if *net {
 		modules.NetworkEvents()
+		os.Exit(0)
+	}
+
+	if *event {
+		modules.LogEvents()
 		os.Exit(0)
 	}
 
