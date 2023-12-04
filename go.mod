@@ -1,3 +1,3 @@
-module github.com/Threat-Olympus/hades
+module hades
 
 go 1.21.4

@@ -1,48 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"hades/modules"
 	"os"
-	"os/exec"
 	"os/signal"
-	"strings"
 	"syscall"
 	"time"
 )
-
-// Real-time monitoring of system events
-func monitorSystemEvents() {
-	cmd := exec.Command("netstat", "-nt")
-
-	output, err := cmd.StdoutPipe()
-	if err != nil {
-		fmt.Println("Error creating StdoutPipe for Cmd", err)
-		return
-	}
-
-	if err := cmd.Start(); err != nil {
-		fmt.Println("Error starting Cmd", err)
-		return
-	}
-
-	scanner := bufio.NewScanner(output)
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if strings.Contains(line, "LISTEN") {
-			fmt.Println("Potential threat detected:", line)
-		} else {
-			fmt.Println("No threat detected")
-			os.Exit(0)
-		}
-	}
-
-	if err := cmd.Wait(); err != nil {
-		fmt.Println("Error waiting for Cmd", err)
-		return
-	}
-}
 
 // // Detection of known threat indicators
 // func detectThreatIndicators() {
@@ -61,7 +26,7 @@ func monitorSystemEvents() {
 // }
 
 func main() {
-	go monitorSystemEvents()
+	go modules.MONITORSYSTEMEVENT()
 
 	// go detectThreatIndicators()
 

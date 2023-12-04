@@ -1,4 +1,4 @@
-package libs
+package modules
 
 import (
 	"bufio"
@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Real-time monitoring of system events
 func MONITORSYSTEMEVENT() {
 	cmd := exec.Command("netstat", "-nt")
 
