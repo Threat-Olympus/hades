@@ -4,13 +4,12 @@ package modules
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"os/exec"
 	"strings"
 )
 
 func NetworkEvents() {
-	cmd := exec.Command("netstat", "-nt")
+	cmd := exec.Command("netstat", "-a")
 
 	output, err := cmd.StdoutPipe()
 	if err != nil {
@@ -29,9 +28,6 @@ func NetworkEvents() {
 
 		if strings.Contains(line, "LISTEN") {
 			fmt.Println("Potential threat detected:", line)
-		} else {
-			fmt.Println("No threat detected")
-			os.Exit(0)
 		}
 	}
 
