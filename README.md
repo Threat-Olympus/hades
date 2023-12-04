@@ -21,7 +21,7 @@ To install Hades, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/hades.git
+   git clone https://github.com/h3athen/hades.git
    ```
 
 2. Build the project:
