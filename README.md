@@ -34,10 +34,25 @@ To install Hades, follow these steps:
 3. Run Hades:
 
    ```shell
-   ./hades
+   ./hades -h
    ```
 
 ## Usage
 
-To use Hades, you can run it with the default configuration or provide a custom configuration file. For example:
-
+```
+Usage of hades:
+  -cpu
+        Monitor CPU usage
+  -event
+        Monitor Windows log events
+  -fsm
+        Monitor file system events
+  -help
+        Show help
+  -mem
+        Monitor memory usage
+  -net
+        Monitor network events
+  -path string
+        path to file monitor (default ".")
+```
