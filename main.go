@@ -26,12 +26,20 @@ var (
 	help  *bool
 	net   *bool
 	event *bool
+	cpu   *bool
+	mem   *bool
+	fsm   *bool
+	path  *string
 )
 
 func init() {
 	help = flag.Bool("help", false, "Show help")
 	net = flag.Bool("net", false, "Monitor network events")
 	event = flag.Bool("event", false, "Monitor Windows log events")
+	cpu = flag.Bool("cpu", false, "Monitor CPU usage")
+	mem = flag.Bool("mem", false, "Monitor memory usage")
+	fsm = flag.Bool("fsm", false, "Monitor file system events")
+	path = flag.String("path", ".", "path to file monitor")
 }
 
 func main() {
@@ -52,6 +60,17 @@ func main() {
 		os.Exit(0)
 	}
 
+	if *cpu {
+		modules.MonitorCPU()
+	}
+
+	if *mem {
+		modules.MonitorMemory()
+	}
+
+	if *fsm {
+		modules.MonitorFileSystem(*path)
+	}
 	// go modules.NetworkEvents()
 	// go modules.LogEvents()
 
