@@ -73,6 +73,7 @@ func LogEvents() {
 	}
 }
 
+// Monitor CPU Usage
 func MonitorCPU() {
 	for {
 		// Print the current CPU usage
@@ -81,6 +82,7 @@ func MonitorCPU() {
 	}
 }
 
+// Monitor Memory Usage
 func MonitorMemory() {
 	for {
 		// Print the current memory usage
@@ -91,6 +93,7 @@ func MonitorMemory() {
 	}
 }
 
+// Monitor File System
 func MonitorFileSystem(path string) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"hades/modules"
 	"os"
 )
@@ -69,7 +70,11 @@ func main() {
 	}
 
 	if *fsm {
-		modules.MonitorFileSystem(*path)
+		if *path != "." {
+			modules.MonitorFileSystem(*path)
+		} else {
+			fmt.Println("[-]: Path is not set")
+		}
 	}
 	// go modules.NetworkEvents()
 	// go modules.LogEvents()
