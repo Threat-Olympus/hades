@@ -13,7 +13,7 @@ func CheckDllInjection() {
     $KnownDLLs | ForEach-Object {
         $FullPath = Join-Path -Path $Path -ChildPath $_.PSChildName
         if (!(Test-Path -Path $FullPath)) {
-            Write-Output ("Potential DLL hijacking detected: " + $FullPath)
+            Write-Output ("Potential DLL hijacking: " + $FullPath)
         }
     }
     `
@@ -49,7 +49,7 @@ func CheckProcessInjection() {
 	$Processes | ForEach-Object {
 		$ProcessPath = $_.Path
 		if ($ProcessPath -eq $null) {
-			Write-Output ("Potential process injection detected: " + $_.Name)
+			Write-Output ("Potential process injection: " + $_.Name)
 		}
 	}
 	`
