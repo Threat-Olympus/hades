@@ -5,11 +5,8 @@ import (
 	"fmt"
 	"hades/modules"
 	"os"
+	"time"
 )
-
-// // Detection of known threat indicators
-// func detectThreatIndicators() {
-// }
 
 // // Behavior-based anomaly detection
 // func detectAnomalies() {
@@ -24,13 +21,14 @@ import (
 // }
 
 var (
-	help  *bool
-	net   *bool
-	event *bool
-	cpu   *bool
-	mem   *bool
-	fsm   *bool
-	path  *string
+	help   *bool
+	net    *bool
+	event  *bool
+	cpu    *bool
+	mem    *bool
+	fsm    *bool
+	path   *string
+	threat *bool
 )
 
 func init() {
@@ -41,6 +39,7 @@ func init() {
 	mem = flag.Bool("mem", false, "Monitor memory usage")
 	fsm = flag.Bool("fsm", false, "Monitor file system events")
 	path = flag.String("path", ".", "path to file monitor")
+	threat = flag.Bool("threat", false, "Detect known threat indicators")
 }
 
 func main() {
@@ -76,10 +75,14 @@ func main() {
 			fmt.Println("[-]: Path is not set")
 		}
 	}
-	// go modules.NetworkEvents()
-	// go modules.LogEvents()
 
-	// go detectThreatIndicators()
+	if *threat {
+		fmt.Println("[+] Checking for DLL injection...")
+		modules.CheckDllInjection()
+		time.Sleep(2 * time.Second)
+		fmt.Println("[+] Checking for process injection...")
+		modules.CheckProcessInjection()
+	}
 
 	// go detectAnomalies()
 
